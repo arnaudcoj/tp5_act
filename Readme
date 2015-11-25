@@ -1,0 +1,16 @@
+GROUPE 4
+COJEZ Arnaud
+LEPRETRE Rémy
+TP5
+
+Q2.1
+  Sous forme d'une liste de triplets, Le premier élément triplet étant un Point "origine" (x, y), le second la largeur de la part (entier), enfin le troisième serait la hauteur de la part (entier).
+
+Q2.2
+  La taille du problème est : h*l*log(case) + log(c) + log(n)
+
+  La taille d'un triplet est : log(origine.x) + log(origine.y) + log(largeur) + log(hauteur)
+  La taille de la solution est : taille_triplet*h*l
+
+Q2.3
+  
