@@ -13,4 +13,12 @@ Q2.2
   La taille de la solution est : taille_triplet*h*l
 
 Q2.3
+  Voir l'implémentation
   
+Q2.4
+  En prenant h*l la surface d'une pizza.
+  La compléxité pour vérifier la validité d'un certificat est en O(h*l)
+  
+Q2.5
+  Le certificat est généré aléatoirement.
+  La complexité de l'algortihme de vérification d'un certificat pour une pizza est polynomiale par rapport à la taille de la donnée, du coup le problème est NP.
