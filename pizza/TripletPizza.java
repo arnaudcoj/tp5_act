@@ -1,3 +1,5 @@
+package pizza;
+
 import java.awt.Point;
 
 public class TripletPizza {
@@ -37,6 +39,10 @@ public class TripletPizza {
     return this.height;
   }
 
+  public String toString() {
+    return "x:" + getX() + " y:" + getY() + " width:" + getWidth() + " height:" + getHeight();
+  }
+
   public class Vector2 {
     protected int x;
     protected int y;
@@ -61,5 +67,6 @@ public class TripletPizza {
     public void setY(int y) {
       this.y = y;
     }
+
   }
 }

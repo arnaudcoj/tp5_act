@@ -1,3 +1,7 @@
+package pizza;
+
+import pizza.CertificatPizza;
+
 public class Main {
 
   public static void main(String[] args) {
@@ -10,6 +14,7 @@ public class Main {
     pizza[1][1] = pizza[2][1] = pizza[3][1] = Garniture.H;
     ReginaProblem regina = new ReginaProblem(pizza, 6, 1);
 
+    regina.generateParts();
     //créer CertificatPizza
     CertificatPizza cert = new CertificatPizza();
     cert.add(new TripletPizza(0,0,2,3));
