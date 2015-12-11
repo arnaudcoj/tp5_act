@@ -10,6 +10,10 @@ public class CertificatPizza {
     this.parts = new LinkedList<TripletPizza>();
   }
 
+  public CertificatPizza(List<TripletPizza> parts) {
+    this.parts = parts;
+  }
+
   public List<TripletPizza> getParts() {
     return this.parts;
   }

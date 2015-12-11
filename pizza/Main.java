@@ -1,10 +1,35 @@
 package pizza;
 
 import pizza.CertificatPizza;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
 
   public static void main(String[] args) {
+    if(args.length < 1) {
+      System.out.println("usage");
+      return;
+    }
+
+    File file = new File(args[0]);
+    try {
+      ReginaProblem pizza = new ReginaProblem(file);
+      for(TripletPizza part : pizza.randomSolve()) {
+        System.out.println("sol " + part);
+      }
+      if(pizza.isCorrect(new CertificatPizza(pizza.randomSolve())))
+        System.out.println("it's working");
+      else
+        System.out.println("nope");
+
+    } catch (FileNotFoundException e) {
+      System.out.println("file not found !");
+    }
+
+  }
+
+  public static void p1() {
 
     //créer ReginaProblem
     Garniture[][] pizza = new Garniture[5][3];
@@ -14,7 +39,6 @@ public class Main {
     pizza[1][1] = pizza[2][1] = pizza[3][1] = Garniture.H;
     ReginaProblem regina = new ReginaProblem(pizza, 6, 1);
 
-    regina.generateParts();
     //créer CertificatPizza
     CertificatPizza cert = new CertificatPizza();
     cert.add(new TripletPizza(0,0,2,3));
