@@ -15,18 +15,20 @@ public class Main {
     File file = new File(args[0]);
     try {
       ReginaProblem pizza = new ReginaProblem(file);
-      for(TripletPizza part : pizza.randomSolve()) {
+      CertificatPizza cert = new CertificatPizza(pizza.randomSolve());
+      for(TripletPizza part : cert.getParts()) {
         System.out.println("sol " + part);
       }
-      if(pizza.isCorrect(new CertificatPizza(pizza.randomSolve())))
+      if(pizza.isCorrect(cert))
         System.out.println("it's working");
       else
         System.out.println("nope");
 
+      cert.printToFile("res.d");
     } catch (FileNotFoundException e) {
       System.out.println("file not found !");
     }
-
+  
   }
 
   public static void p1() {
