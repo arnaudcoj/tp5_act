@@ -24,7 +24,7 @@ public class Main {
       else
         System.out.println("nope");
 
-      cert.printToFile("res.d");
+      cert.printToFile("res.out");
     } catch (FileNotFoundException e) {
       System.out.println("file not found !");
     }

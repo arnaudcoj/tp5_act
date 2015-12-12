@@ -75,6 +75,7 @@ public class ReginaProblem {
     }
 
     public boolean isCorrect(CertificatPizza cert) {
+	int nbCases = 0;
 	boolean verif[][] = new boolean[pizza.length][pizza[0].length];
 	if (n<0)
 	    return false;
@@ -86,8 +87,9 @@ public class ReginaProblem {
 	    part = parts.pop();
 	    if(!isValid(part) || !isDistinct(parts, part))
 		return false;
+	    nbCases += part.getWidth() * part.getHeight();
 	}
-	
+	System.out.println("Score : " + nbCases);
 	return true;
     }
 
