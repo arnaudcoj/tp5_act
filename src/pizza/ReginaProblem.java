@@ -93,12 +93,19 @@ public class ReginaProblem {
 	return true;
     }
 
-    public List<TripletPizza> generateParts() {
+    public List<TripletPizza> getRandomParts() {
+	List<TripletPizza> parts = getOrderedParts();
+	Collections.shuffle(parts);
+	return parts;
+    }
+
+    //On part de la fin de la grille afin d'avoir les plus grandes parts en premier
+    public List<TripletPizza> getOrderedParts() {
 	List<TripletPizza> parts = new ArrayList<TripletPizza>();
 	for(int i = 0; i < pizza.length; i++) {
 	    for(int j = 0; j < pizza[0].length; j++) {
-		for(int k = i; k < pizza.length; k++) {
-		    for(int l = j; l < pizza[0].length; l++) {
+		for(int k = pizza.length -1; k >= i; k--) {
+		    for(int l = pizza[0].length -1; l >= j; l--) {
 			int width = k - i + 1;
 			int height = l - j + 1;
 			TripletPizza part = new TripletPizza(i, j, width, height);
@@ -108,7 +115,6 @@ public class ReginaProblem {
 		}
 	    }
 	}
-	System.out.println("gen : " + parts.size());
 	return parts;
     }
 
@@ -125,9 +131,8 @@ public class ReginaProblem {
 	return jambon;
     }
 
-    public List<TripletPizza> randomSolve() {
-	List<TripletPizza> possibleParts = generateParts();
-	Collections.shuffle(possibleParts);
+    public List<TripletPizza> pavageSolve() {
+	List<TripletPizza> possibleParts = getOrderedParts();
 	List<TripletPizza> parts = new LinkedList<TripletPizza>();
 	for (TripletPizza part : possibleParts) {
 	    if(isDistinct(parts, part))
@@ -136,10 +141,21 @@ public class ReginaProblem {
 	return parts;
     }
 
+    public List<TripletPizza> randomSolve() {
+	List<TripletPizza> possibleParts = getRandomParts();
+	List<TripletPizza> parts = new LinkedList<TripletPizza>();
+	for (TripletPizza part : possibleParts) {
+	    if(isDistinct(parts, part))
+		parts.add(part);
+	}
+	return parts;
+    }
+	
     public boolean isDistinct(List<TripletPizza> parts, TripletPizza part) {
 	for(TripletPizza previous : parts)
 	    if(part.overlaps(previous))
 		return false;
 	return true;
     }
+
 }

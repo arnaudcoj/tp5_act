@@ -15,7 +15,7 @@ public class Main {
     File file = new File(args[0]);
     try {
       ReginaProblem pizza = new ReginaProblem(file);
-      CertificatPizza cert = new CertificatPizza(pizza.randomSolve());
+      CertificatPizza cert = new CertificatPizza(pizza.pavageSolve());
       for(TripletPizza part : cert.getParts()) {
         System.out.println("sol " + part);
       }
