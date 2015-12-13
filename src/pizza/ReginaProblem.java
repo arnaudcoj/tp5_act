@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class ReginaProblem {
     protected Garniture[][] pizza;
@@ -117,7 +118,44 @@ public class ReginaProblem {
 	}
 	return parts;
     }
+    
+    //Nom a changer
+    public List<TripletPizza> getBiggestAndLessHamParts() {
+	List<TripletPizza> parts = getOrderedParts();
+	Comparator<TripletPizza> comp = new Comparator<TripletPizza>() {
+		public int compare(TripletPizza o1, TripletPizza o2) {
+		    //check d'abord la position
+		    if(o1.getY() < o2.getY())
+			return -1;
+		    if(o1.getY() > o2.getY())
+			return 1;
+		    if(o1.getX() < o2.getX())
+			return -1;
+		    if(o1.getX() > o2.getX())
+			return 1;
 
+		    //on a donc la meme origine
+		    //maintenant on verifie si il y a plus de jambon ou non
+		    if(getHamQuantity(o1) < getHamQuantity(o2))
+			return -1;
+		    if(getHamQuantity(o1) > getHamQuantity(o2))
+			return 1;
+
+		    //on a donc le meme nombre de jambons
+		    //maintenant on verifie si la taille est la meme ou non
+		    
+		    if(o1.getSize() > o2.getSize())
+			return -1;
+		    if(o1.getSize() < o2.getSize())
+			return 1;
+		    
+		    return 0;
+		}
+	    };
+	Collections.sort(parts, comp);
+	return parts;
+    }
+    
     public boolean isValid(TripletPizza part) {
 	return part.getWidth() * part.getHeight() <= this.c && getHamQuantity(part) >= this.n;
     }
@@ -150,7 +188,18 @@ public class ReginaProblem {
 	}
 	return parts;
     }
-	
+
+    //Nom a changer
+    public List<TripletPizza> biggestWithLessHamSolve() {
+	List<TripletPizza> possibleParts = getBiggestAndLessHamParts();
+	List<TripletPizza> parts = new LinkedList<TripletPizza>();
+	for (TripletPizza part : possibleParts) {
+	    if(isDistinct(parts, part))
+		parts.add(part);
+	}
+	return parts;
+    }
+    
     public boolean isDistinct(List<TripletPizza> parts, TripletPizza part) {
 	for(TripletPizza previous : parts)
 	    if(part.overlaps(previous))

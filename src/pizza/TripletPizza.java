@@ -51,6 +51,10 @@ public class TripletPizza {
 	return true; // boxes overlap	
     }
 
+    public int getSize() {
+	return getWidth() * getHeight();
+    }
+
     public class Vector2 {
 	protected int x;
 	protected int y;
