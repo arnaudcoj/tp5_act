@@ -1,6 +1,5 @@
 package pizza;
 
-import java.awt.Point;
 
 public class TripletPizza {
     protected Vector2 origin;
@@ -44,11 +43,11 @@ public class TripletPizza {
     }
 
     public boolean overlaps(TripletPizza other) { 
-	if (this.getX() + this.getWidth() -1 < other.getX()) return false; // a is left of b
-	if (this.getX() > other.getX() + other.getWidth() -1) return false; // a is right of b
-	if (this.getY() + this.getHeight() -1 < other.getY()) return false; // a is above b
-	if (this.getY() > other.getY() + other.getHeight() -1) return false; // a is below b
-	return true; // boxes overlap	
+		if (this.getX() + this.getWidth() -1 < other.getX()) return false; // a is left of b
+		if (this.getX() > other.getX() + other.getWidth() -1) return false; // a is right of b
+		if (this.getY() + this.getHeight() -1 < other.getY()) return false; // a is above b
+		if (this.getY() > other.getY() + other.getHeight() -1) return false; // a is below b
+		return true; // boxes overlap	
     }
 
     public class Vector2 {
