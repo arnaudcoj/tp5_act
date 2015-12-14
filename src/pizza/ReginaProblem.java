@@ -1,13 +1,13 @@
 package pizza;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import pizza.TripletPizza;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ReginaProblem {
     protected Garniture[][] pizza;
@@ -150,19 +150,21 @@ public class ReginaProblem {
     public List<TripletPizza> heuristiqueGlouton(){
     	int height, width;
     	List<TripletPizza> pizzaCut = new ArrayList<TripletPizza>();
-    	List<TripletPizza> possibleParts = generateParts();								//on génère toutes les parts potentielles
-    	pizzaCut.add(possibleParts.remove(0));											//on ajoute la première part qui seras forcément présente
+    	List<TripletPizza> possibleParts = generateParts();			//on génère toutes les parts potentielles
+    	pizzaCut.add(possibleParts.remove(0));						//on ajoute la première part qui seras forcément présente
     	height = pizzaCut.get(0).height + pizzaCut.get(0).getY();
-    	width = pizzaCut.get(0).width + pizzaCut.get(0).getX();							//on récupère la hauteur et la largeur de la première part
-		for (int i=0;i<this.pizza[0].length;i++) {								//pour toutes les lignes de la pizza
+    	width = pizzaCut.get(0).width + pizzaCut.get(0).getX();		//on récupère la hauteur et la largeur de la première part
+    	Iterator ite = possibleParts.iterator();
+		for (int i=0;i<this.pizza[0].length;i++) {					//pour toutes les lignes de la pizza
 			System.out.println("i = " + i);
-			if (i>height)															//si on est sur une ligne ou il n'y a pas encore de part, la longueur est de 0	
+			if (i>height)											//si on est sur une ligne ou il n'y a pas encore de part, la longueur est de 0	
 				width = 0;
-			while(width != this.pizza.length - 1) {									//pour toute la longueur de la pizza
+			while(width != this.pizza.length - 1) {					//pour toute la longueur de la pizza
 				System.out.println("width = " + width);
-				for (TripletPizza part : possibleParts) {
+				if(ite.hasNext()){
+					TripletPizza part = (TripletPizza) ite.next();
 					if (part.getX() >= width) {
-						width = part.getX() + part.width;							//on cherche si une part peut être ajouté et on met à jour les variables
+						width = part.getX() + part.width;			//on cherche si une part peut être ajouté et on met à jour les variables
 						height = (part.getY() + part.height) > height ? part.getY() + part.height : height ;
 						pizzaCut.add(part);
 						break;
