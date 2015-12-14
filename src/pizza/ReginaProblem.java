@@ -161,7 +161,7 @@ public class ReginaProblem {
 				width = 0;
 			while(width != this.pizza.length - 1) {					//pour toute la longueur de la pizza
 				System.out.println("width = " + width);
-				if(ite.hasNext()){
+				while(ite.hasNext()){
 					TripletPizza part = (TripletPizza) ite.next();
 					if (part.getX() >= width) {
 						width = part.getX() + part.width;			//on cherche si une part peut être ajouté et on met à jour les variables
