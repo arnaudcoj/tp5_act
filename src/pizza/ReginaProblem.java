@@ -88,7 +88,6 @@ public class ReginaProblem {
 	    if(!isValid(part) || !isDistinct(parts, part))
 		return false;
 	}
-	System.out.println("Score : " + cert.getScore());
 	return true;
     }
 

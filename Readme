@@ -3,6 +3,12 @@ COJEZ Arnaud
 LEPRETRE Rémy
 TP5
 
+
+Usage :
+      "$ make all" pour compiler le programme
+      "$ make execute in="file.in" " pour lancer le programme en utilisant un fichier représentant une pizza
+      "$ make clean" pour nettoyer les fichiers
+      
 Q2.1
   Sous forme d'une liste de triplets, Le premier élément triplet étant un Point "origine" (x, y), le second la largeur de la part (entier), enfin le troisième serait la hauteur de la part (entier).
 
@@ -22,3 +28,6 @@ Q2.4
 Q2.5
   Le certificat est généré aléatoirement.
   La complexité de l'algortihme de vérification d'un certificat pour une pizza est polynomiale par rapport à la taille de la donnée, du coup le problème est NP.
+
+Q3.1.3
+  Oui il est possible de tomber sur l'optimal en exécutant l'algorithme un grand nombre de fois. Seulement le nombre de solution possibles est énorme tandis le(s) optimal/aux sont en très petite quantité, les probabilités de tomber sur un optimal par hasard sont donc extrêmement faibles.

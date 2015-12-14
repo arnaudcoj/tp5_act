@@ -8,25 +8,24 @@ public class Main {
 
   public static void main(String[] args) {
     if(args.length < 1) {
-      System.out.println("usage");
+      System.out.println("usage : make execute in=\"file.in\"");
       return;
     }
 
     File file = new File(args[0]);
     try {
       ReginaProblem pizza = new ReginaProblem(file);
-      CertificatPizza rdmCert = new CertificatPizza(pizza.randomSolve());
-      CertificatPizza cert = pizza.hillClimbingSolve(rdmCert, pizza.getBiggestAndLessHamParts());
+      CertificatPizza cert = new CertificatPizza(pizza.biggestWithLessHamSolve());
       
       for(TripletPizza part : cert.getParts()) {
         System.out.println("sol " + part);
       }
       if(pizza.isCorrect(cert))
-        System.out.println("it's working");
+        System.out.println("The solution found is correct !");
       else
-        System.out.println("nope");
+        System.out.println("The solution found is not correct...");
 
-      System.out.println("rdm : " + rdmCert.getScore() + " -hillclimbing> " + cert.getScore());
+      System.out.println("Here is the score : " + cert.getScore());
       cert.printToFile("res.out");
     } catch (FileNotFoundException e) {
       System.out.println("file not found !");
