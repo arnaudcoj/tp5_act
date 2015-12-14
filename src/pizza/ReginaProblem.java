@@ -1,14 +1,14 @@
 package pizza;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import pizza.TripletPizza;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ReginaProblem {
     protected Garniture[][] pizza;
@@ -232,6 +232,23 @@ public class ReginaProblem {
 	    if(part.overlaps(previous))
 		return false;
 	return true;
+    }
+    
+    /**
+     * Return a pizza cut with an heuristic and greedy algo
+     * @return List<TripletPizza>
+     */
+    public List<TripletPizza> heuristiqueGlouton(){
+    	List<TripletPizza> pizzaCut = new ArrayList<TripletPizza>();
+    	List<TripletPizza> possibleParts = getBiggestAndLessHamParts();
+    	pizzaCut.add(possibleParts.remove(0));
+    	Iterator ite = possibleParts.iterator();
+		while (ite.hasNext()) {
+			TripletPizza part = (TripletPizza) ite.next();
+			if(this.isDistinct(pizzaCut, part))
+				pizzaCut.add(part);
+		}
+    	return pizzaCut;
     }
 
 }
