@@ -15,7 +15,9 @@ public class Main {
     File file = new File(args[0]);
     try {
       ReginaProblem pizza = new ReginaProblem(file);
-      CertificatPizza cert = new CertificatPizza(pizza.biggestWithLessHamSolve());
+      CertificatPizza rdmCert = new CertificatPizza(pizza.randomSolve());
+      CertificatPizza cert = pizza.hillClimbingSolve(rdmCert, pizza.getBiggestAndLessHamParts());
+      
       for(TripletPizza part : cert.getParts()) {
         System.out.println("sol " + part);
       }
@@ -24,6 +26,7 @@ public class Main {
       else
         System.out.println("nope");
 
+      System.out.println("rdm : " + rdmCert.getScore() + " -hillclimbing> " + cert.getScore());
       cert.printToFile("res.out");
     } catch (FileNotFoundException e) {
       System.out.println("file not found !");

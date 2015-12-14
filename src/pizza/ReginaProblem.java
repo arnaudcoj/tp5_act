@@ -76,7 +76,6 @@ public class ReginaProblem {
     }
 
     public boolean isCorrect(CertificatPizza cert) {
-	int nbCases = 0;
 	boolean verif[][] = new boolean[pizza.length][pizza[0].length];
 	if (n<0)
 	    return false;
@@ -88,9 +87,8 @@ public class ReginaProblem {
 	    part = parts.pop();
 	    if(!isValid(part) || !isDistinct(parts, part))
 		return false;
-	    nbCases += part.getWidth() * part.getHeight();
 	}
-	System.out.println("Score : " + nbCases);
+	System.out.println("Score : " + cert.getScore());
 	return true;
     }
 
@@ -105,8 +103,9 @@ public class ReginaProblem {
 	List<TripletPizza> parts = new ArrayList<TripletPizza>();
 	for(int i = 0; i < pizza.length; i++) {
 	    for(int j = 0; j < pizza[0].length; j++) {
-		for(int k = pizza.length -1; k >= i; k--) {
-		    for(int l = pizza[0].length -1; l >= j; l--) {
+		//(optimisation de temps) soit on va au bout de la pizza soit on part sur le nombre de cases max
+		for(int k = Math.min(pizza.length -1, i + this.c -1); k >= i; k--) {
+		    for(int l = Math.min(pizza[0].length -1, j + this.c -1); l >= j; l--) {
 			int width = k - i + 1;
 			int height = l - j + 1;
 			TripletPizza part = new TripletPizza(i, j, width, height);
@@ -198,6 +197,34 @@ public class ReginaProblem {
 		parts.add(part);
 	}
 	return parts;
+    }
+
+    public CertificatPizza hillClimbingSolve(CertificatPizza solution, List<TripletPizza> parts) {
+	if(parts.isEmpty())
+	    return solution;
+
+	CertificatPizza bestCert = solution;
+	
+	parts.removeAll(solution.getParts());
+
+	for(int i = 0; i<bestCert.size(); i++){
+	    CertificatPizza newCert = new CertificatPizza(bestCert.getParts());
+	    TripletPizza oldPart = newCert.get(i);
+	    newCert.remove(oldPart);
+	    for(TripletPizza part : parts) {
+		if(part.getSize() > oldPart.getSize() && this.isDistinct(newCert.getParts(),part)) {
+		    newCert.add(part);
+		    break;
+		}
+	    }
+	    if(newCert.getScore() > bestCert.getScore())
+		bestCert = newCert;
+	}
+
+	if(bestCert.getScore() > solution.getScore())
+	    return this.hillClimbingSolve(bestCert, parts);
+	
+	return solution;
     }
     
     public boolean isDistinct(List<TripletPizza> parts, TripletPizza part) {
